@@ -1,24 +1,22 @@
-# ZipChair AI (Static)
+# ZipChair AI Suite
 
-This repo is a static Vercel deploy containing:
+AI-powered tools built for [ZipChair.com](https://www.zipchair.com) — the official licensed furniture partner of the NFL, MLB, NHL, AEW, and more.
 
-- `/` — ZipChair shopping assistant (fully client-side; loads `public/data/products.json`)
-- `/pitch/` — pitch deck (static HTML)
-- `/intel/` — competitor intel dashboard (static; loads JSON from `/intel/data/*`)
+## 🛒 AI Shopping Assistant
+Conversational product finder across 12,000+ officially licensed chairs, recliners, bar stools, and more. Understands team nicknames, budget filtering, and multi-product requests.
 
-## Local dev
+**→ [Try it live](https://zipchair-deploy.vercel.app)**
 
-```bash
-cd projects/zipchair-deploy
-npm run dev
-```
+## 🎯 Pitch Deck
+Interactive presentation showcasing the AI operations suite — swipeable on mobile, arrow-key navigable on desktop.
 
-Then open:
+**→ [View deck](https://zipchair-deploy.vercel.app/pitch/)**
 
-- http://localhost:3000/
-- http://localhost:3000/pitch/
-- http://localhost:3000/intel/
+## 📊 Competitor Intelligence Dashboard
+Real-time competitive analysis across Secretlab, DXRacer, and Mavix — pricing matrix, sentiment analysis, NPS comparison, and strategic alerts.
 
-## Notes
+**→ [View dashboard](https://zipchair-deploy.vercel.app/intel/)**
 
-- The assistant requires a web server for `fetch()` to load `products.json` (browsers typically block `file://` fetches).
+---
+
+Built by [Steven Richardson](mailto:srich7x@gmail.com)
