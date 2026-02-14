@@ -357,7 +357,16 @@ document.getElementById('nav').addEventListener('click', e => {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('page-' + btn.dataset.page).classList.add('active');
+  history.replaceState(null, '', '#' + btn.dataset.page);
 });
+
+// Deep-link via hash
+function activateTab(name) {
+  const btn = document.querySelector(`nav button[data-page="${name}"]`);
+  if (btn) btn.click();
+}
+if (location.hash) activateTab(location.hash.slice(1));
+window.addEventListener('hashchange', () => activateTab(location.hash.slice(1)));
 
 function render() {
   if (!DATA) return;
