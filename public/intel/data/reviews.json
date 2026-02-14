@@ -1,0 +1,75 @@
+{
+  "lastUpdated": "2026-02-14T17:52:00Z",
+  "dataSource": "PLACEHOLDER — Amazon reviews require API approval. Replace with real scrape data.",
+  "NOTE": "All review data below is realistic placeholder for demo purposes. Connect Amazon Product Advertising API or scraping service for production.",
+  "brands": {
+    "secretlab": {
+      "overallRating": 4.5,
+      "totalReviews": 28400,
+      "ratingDistribution": { "5": 67, "4": 18, "3": 7, "2": 4, "1": 4 },
+      "topPraise": [
+        { "theme": "Build Quality", "mentions": 4200, "sentiment": 0.92, "sample": "Incredibly sturdy build, feels like it'll last years" },
+        { "theme": "Lumbar Support", "mentions": 3100, "sentiment": 0.88, "sample": "The adjustable lumbar is a game-changer for long sessions" },
+        { "theme": "Premium Materials", "mentions": 2800, "sentiment": 0.85, "sample": "Leather quality is excellent, no peeling after 2 years" },
+        { "theme": "Brand Collabs", "mentions": 1900, "sentiment": 0.90, "sample": "Love my League of Legends edition, design is perfect" }
+      ],
+      "topComplaints": [
+        { "theme": "Price", "mentions": 2100, "sentiment": -0.72, "sample": "Great chair but hard to justify $500+ for a chair" },
+        { "theme": "Firm Seat", "mentions": 1400, "sentiment": -0.61, "sample": "Seat cushion is too firm for the first few weeks" },
+        { "theme": "Assembly Difficulty", "mentions": 980, "sentiment": -0.55, "sample": "Took 2 hours to assemble, instructions could be clearer" },
+        { "theme": "Armrest Wobble", "mentions": 750, "sentiment": -0.48, "sample": "4D armrests develop slight wobble after 6 months" }
+      ],
+      "nps": 62
+    },
+    "dxracer": {
+      "overallRating": 4.1,
+      "totalReviews": 15200,
+      "ratingDistribution": { "5": 48, "4": 25, "3": 12, "2": 8, "1": 7 },
+      "topPraise": [
+        { "theme": "Racing Aesthetic", "mentions": 2400, "sentiment": 0.84, "sample": "Looks exactly like a racing seat, love the style" },
+        { "theme": "Competitive Price", "mentions": 2100, "sentiment": 0.80, "sample": "Best value gaming chair at this price point" },
+        { "theme": "Durability", "mentions": 1800, "sentiment": 0.78, "sample": "Had mine for 3 years, still going strong" }
+      ],
+      "topComplaints": [
+        { "theme": "Outdated Design", "mentions": 1900, "sentiment": -0.68, "sample": "Design hasn't really changed in years, feels dated" },
+        { "theme": "Comfort for Tall Users", "mentions": 1200, "sentiment": -0.65, "sample": "Not great if you're over 6'2\", seat is narrow" },
+        { "theme": "Peeling Material", "mentions": 1100, "sentiment": -0.72, "sample": "PU leather started peeling after 18 months" },
+        { "theme": "Customer Support", "mentions": 800, "sentiment": -0.58, "sample": "Warranty claim took 3 weeks to process" }
+      ],
+      "nps": 38
+    },
+    "mavix": {
+      "overallRating": 4.3,
+      "totalReviews": 6800,
+      "ratingDistribution": { "5": 55, "4": 24, "3": 10, "2": 6, "1": 5 },
+      "topPraise": [
+        { "theme": "Ergonomic Design", "mentions": 1800, "sentiment": 0.91, "sample": "Best ergonomics in a gaming chair, period" },
+        { "theme": "Mesh Breathability", "mentions": 1200, "sentiment": 0.86, "sample": "No more sweaty back during summer gaming sessions" },
+        { "theme": "Modern Look", "mentions": 900, "sentiment": 0.83, "sample": "Looks professional enough for my home office" }
+      ],
+      "topComplaints": [
+        { "theme": "Price vs Features", "mentions": 890, "sentiment": -0.62, "sample": "M9 is almost $1000, that's office chair territory" },
+        { "theme": "Limited Colors", "mentions": 650, "sentiment": -0.45, "sample": "Wish there were more color options" },
+        { "theme": "Brand Recognition", "mentions": 400, "sentiment": -0.38, "sample": "Never heard of Mavix before, took a chance" }
+      ],
+      "nps": 52
+    },
+    "zipchair": {
+      "overallRating": 4.2,
+      "totalReviews": 9400,
+      "ratingDistribution": { "5": 52, "4": 26, "3": 11, "2": 6, "1": 5 },
+      "topPraise": [
+        { "theme": "Licensed Branding", "mentions": 3200, "sentiment": 0.93, "sample": "Finally a quality chair with my team's logo!" },
+        { "theme": "XZipit System", "mentions": 2100, "sentiment": 0.88, "sample": "Love swapping panels when my team changes" },
+        { "theme": "Comfort", "mentions": 1800, "sentiment": 0.82, "sample": "Very comfortable for long TV watching sessions" },
+        { "theme": "Value", "mentions": 1500, "sentiment": 0.80, "sample": "Great price for a licensed product" }
+      ],
+      "topComplaints": [
+        { "theme": "Gaming Feature Gap", "mentions": 800, "sentiment": -0.52, "sample": "Wish it had 4D armrests like Secretlab" },
+        { "theme": "Weight", "mentions": 600, "sentiment": -0.45, "sample": "Chair is heavier than expected" },
+        { "theme": "Brand Awareness", "mentions": 450, "sentiment": -0.40, "sample": "Didn't know ZipChair existed until my friend mentioned it" }
+      ],
+      "nps": 48
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "lastUpdated": "2026-02-14T17:52:00Z",
+  "dataSource": "Live scrape (Mavix, ZipChair Shopify API) + known public pricing (Secretlab, DXRacer)",
+  "brands": {
+    "secretlab": {
+      "name": "Secretlab",
+      "currency": "USD",
+      "products": [
+        { "name": "TITAN Evo Lite", "category": "Gaming Chair", "price": 399, "msrp": 399, "url": "https://secretlab.co/collections/titan-evo", "note": "Entry-level TITAN", "scraped": false },
+        { "name": "TITAN Evo", "category": "Gaming Chair", "price": 519, "msrp": 519, "url": "https://secretlab.co/collections/titan-evo", "note": "Core model, fabric/leatherette", "scraped": false },
+        { "name": "TITAN Evo XL", "category": "Gaming Chair", "price": 569, "msrp": 569, "url": "https://secretlab.co/collections/titan-evo", "note": "Large size", "scraped": false },
+        { "name": "TITAN Evo (NAPA Leather)", "category": "Gaming Chair", "price": 949, "msrp": 949, "url": "https://secretlab.co/collections/titan-evo", "note": "Premium leather", "scraped": false },
+        { "name": "MAGNUS Pro Desk", "category": "Desk", "price": 749, "msrp": 749, "url": "https://secretlab.co/collections/magnus-pro", "note": "Sit-stand metal desk", "scraped": false }
+      ],
+      "priceRange": { "min": 399, "max": 949 },
+      "avgPrice": 577,
+      "saleActive": true,
+      "saleNote": "Presidents' Day Sale — up to $139 OFF select products"
+    },
+    "dxracer": {
+      "name": "DXRacer",
+      "currency": "USD",
+      "products": [
+        { "name": "Craft Series", "category": "Gaming Chair", "price": 399, "msrp": 399, "url": "https://www.dxracer.com", "note": "Customizable series", "scraped": false },
+        { "name": "Craft Pro", "category": "Gaming Chair", "price": 499, "msrp": 499, "url": "https://www.dxracer.com", "note": "Premium Craft", "scraped": false },
+        { "name": "Air Series", "category": "Gaming Chair", "price": 399, "msrp": 449, "url": "https://www.dxracer.com", "note": "Mesh ergonomic", "scraped": false },
+        { "name": "Master Series", "category": "Gaming Chair", "price": 449, "msrp": 449, "url": "https://www.dxracer.com", "note": "Modular design", "scraped": false }
+      ],
+      "priceRange": { "min": 399, "max": 499 },
+      "avgPrice": 437,
+      "saleActive": false,
+      "saleNote": null
+    },
+    "mavix": {
+      "name": "Mavix",
+      "currency": "USD",
+      "products": [
+        { "name": "M4 Gaming Chair", "category": "Gaming Chair", "price": 444, "msrp": 444, "url": "https://www.mavix.com/products/m4", "note": "Entry ergonomic", "scraped": true },
+        { "name": "M5 Gaming Chair", "category": "Gaming Chair", "price": 474, "msrp": 555, "url": "https://www.mavix.com/products/m5", "note": "$81 OFF sale", "scraped": true },
+        { "name": "M7 Gaming Chair", "category": "Gaming Chair", "price": 619, "msrp": 777, "url": "https://www.mavix.com/products/m7", "note": "$158 OFF sale", "scraped": true },
+        { "name": "M9 Gaming Chair", "category": "Gaming Chair", "price": 799, "msrp": 999, "url": "https://www.mavix.com/products/m9", "note": "$200 OFF sale", "scraped": true },
+        { "name": "Standing Desk", "category": "Desk", "price": 484, "msrp": 484, "url": "https://www.mavix.com/products/standing-desk-rectangle", "note": "New product line", "scraped": true }
+      ],
+      "priceRange": { "min": 444, "max": 799 },
+      "avgPrice": 564,
+      "saleActive": true,
+      "saleNote": "Up to $200 OFF gaming chairs"
+    },
+    "zipchair": {
+      "name": "ZipChair / DreamSeat",
+      "currency": "USD",
+      "products": [
+        { "name": "Xpression Pro Gaming Chair", "category": "Gaming Chair", "price": 349.99, "msrp": 369.99, "url": "https://www.zipchair.com", "note": "Core gaming chair", "scraped": true },
+        { "name": "Xpression Pro 3.0", "category": "Gaming Chair", "price": 399.99, "msrp": 449.99, "url": "https://www.zipchair.com", "note": "Premium gaming", "scraped": true },
+        { "name": "Relax Home Theater Recliner", "category": "Recliner", "price": 849.99, "msrp": 899.99, "url": "https://www.zipchair.com", "note": "Synthetic leather", "scraped": true },
+        { "name": "Relax Recliner (Top Grain Leather)", "category": "Recliner", "price": 1519.99, "msrp": 1599.99, "url": "https://www.zipchair.com", "note": "Premium leather custom order", "scraped": true },
+        { "name": "SuiteMax 3.5 VIP (Row of 2)", "category": "Stadium Seating", "price": 1649.99, "msrp": 2199.99, "url": "https://www.zipchair.com", "note": "25% off", "scraped": true },
+        { "name": "SuiteMax 3.5 VIP (Row of 4)", "category": "Stadium Seating", "price": 2969.99, "msrp": 3299.99, "url": "https://www.zipchair.com", "note": "10% off", "scraped": true },
+        { "name": "Office Chair 1000", "category": "Office Chair", "price": 249.99, "msrp": 274.99, "url": "https://www.zipchair.com", "note": "Licensed office", "scraped": true }
+      ],
+      "priceRange": { "min": 249.99, "max": 2969.99 },
+      "avgPrice": 427,
+      "saleActive": true,
+      "saleNote": "Various products on sale, Seahawks Super Bowl LX Champions gear live"
+    }
+  }
+}

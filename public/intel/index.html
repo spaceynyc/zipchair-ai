@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ZipChair Competitor Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0f1a;--surface:rgba(255,255,255,0.04);--surface2:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.08);--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
+  --blue:#1a7ad4;--orange:#FF6B00;--red:#ef4444;--yellow:#f59e0b;--green:#22c55e;
+  --purple:#8B5CF6;--teal:#10B981;
+}
+html{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body{min-height:100vh;background:var(--bg)}
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 20%,rgba(26,122,212,0.08) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(255,107,0,0.05) 0%,transparent 50%);pointer-events:none;z-index:0}
+
+.app{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:16px}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;margin-bottom:8px;flex-wrap:wrap;gap:12px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--orange),#ff8c33);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;box-shadow:0 4px 20px rgba(255,107,0,0.3)}
+.logo h1{font-size:18px;font-weight:700;letter-spacing:-0.5px}
+.logo h1 span{color:var(--orange)}
+.logo-sub{font-size:11px;color:var(--text3);font-weight:400;letter-spacing:0.5px;text-transform:uppercase}
+.status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3)}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+nav{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px;margin-bottom:20px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav button{padding:10px 18px;border:none;background:none;color:var(--text3);font-family:inherit;font-size:13px;font-weight:500;border-radius:10px;cursor:pointer;transition:all 0.3s;white-space:nowrap;position:relative}
+nav button:hover{color:var(--text)}
+nav button.active{background:linear-gradient(135deg,rgba(26,122,212,0.2),rgba(26,122,212,0.1));color:#fff;box-shadow:0 2px 12px rgba(26,122,212,0.2)}
+nav button.active::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(--blue);border-radius:1px}
+
+.page{display:none;animation:fadeIn 0.4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:var(--surface);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:16px;transition:all 0.3s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,transparent 50%);pointer-events:none}
+.card:hover{border-color:rgba(255,255,255,0.12);transform:translateY(-1px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-size:15px;font-weight:600;letter-spacing:-0.3px}
+.card-badge{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:500}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+
+/* Alert styles */
+.alert{padding:16px;border-radius:12px;margin-bottom:10px;border-left:3px solid;position:relative;transition:all 0.3s}
+.alert:hover{transform:translateX(4px)}
+.alert.red{background:rgba(239,68,68,0.08);border-color:var(--red)}
+.alert.yellow{background:rgba(245,158,11,0.08);border-color:var(--yellow)}
+.alert.green{background:rgba(34,197,94,0.08);border-color:var(--green)}
+.alert-title{font-size:14px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.alert-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.alert-action{font-size:11px;color:var(--orange);margin-top:8px;font-weight:500}
+.alert-time{font-size:10px;color:var(--text3);position:absolute;top:16px;right:16px}
+.severity-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.severity-dot.red{background:var(--red)}
+.severity-dot.yellow{background:var(--yellow)}
+.severity-dot.green{background:var(--green)}
+
+/* Insight card */
+.insight-card{background:linear-gradient(135deg,rgba(26,122,212,0.12),rgba(255,107,0,0.08));border:1px solid rgba(26,122,212,0.2);border-radius:16px;padding:28px;margin-bottom:20px;position:relative;overflow:hidden}
+.insight-card::after{content:'💡';position:absolute;top:20px;right:20px;font-size:32px;opacity:0.5}
+.insight-label{font-size:11px;color:var(--blue);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.insight-title{font-size:20px;font-weight:700;margin-bottom:12px;letter-spacing:-0.5px;line-height:1.3}
+.insight-body{font-size:13px;color:var(--text2);line-height:1.7}
+.insight-meta{display:flex;gap:16px;margin-top:16px;font-size:11px;color:var(--text3)}
+.insight-meta span{display:flex;align-items:center;gap:4px}
+
+/* Price table */
+.price-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+.price-table th{text-align:left;padding:12px 16px;color:var(--text3);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--border)}
+.price-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.price-table tr:hover td{background:rgba(255,255,255,0.02)}
+.price-current{font-weight:700;color:#fff;font-size:15px}
+.price-msrp{text-decoration:line-through;color:var(--text3);font-size:12px;margin-left:6px}
+.price-discount{color:var(--green);font-size:11px;font-weight:600;margin-left:6px}
+.brand-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;font-size:12px;font-weight:500}
+
+/* Price bars */
+.price-bar-container{margin-top:8px}
+.price-bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.price-bar-label{width:100px;font-size:12px;font-weight:500;flex-shrink:0}
+.price-bar-track{flex:1;height:28px;background:var(--surface2);border-radius:8px;position:relative;overflow:hidden}
+.price-bar{height:100%;border-radius:8px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:600;color:#fff;transition:width 1s ease;position:relative}
+.price-bar::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 70%,rgba(255,255,255,0.1));pointer-events:none}
+
+/* Sentiment */
+.rating-big{font-size:42px;font-weight:800;letter-spacing:-2px;line-height:1}
+.rating-stars{color:var(--yellow);font-size:18px;margin-top:4px}
+.rating-count{font-size:12px;color:var(--text3);margin-top:2px}
+.theme-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.theme-item:last-child{border:none}
+.theme-bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.theme-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.theme-name{width:130px;font-size:12px;font-weight:500;flex-shrink:0}
+.theme-count{font-size:11px;color:var(--text3);width:60px;text-align:right;flex-shrink:0}
+.praise .theme-fill{background:linear-gradient(90deg,var(--green),var(--teal))}
+.complaint .theme-fill{background:linear-gradient(90deg,var(--red),var(--yellow))}
+
+/* Word cloud */
+.word-cloud{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:16px 0}
+.word{padding:6px 14px;border-radius:20px;font-weight:500;transition:all 0.3s;cursor:default}
+.word:hover{transform:scale(1.1)}
+
+/* Radar feed */
+.feed-item{padding:16px;border-bottom:1px solid rgba(255,255,255,0.04);transition:all 0.3s}
+.feed-item:last-child{border:none}
+.feed-item:hover{background:rgba(255,255,255,0.02)}
+.feed-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.feed-brand{font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px}
+.feed-category{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px}
+.feed-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.feed-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.feed-time{font-size:10px;color:var(--text3);margin-top:6px}
+
+/* NPS comparison */
+.nps-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.nps-brand{width:80px;font-size:12px;font-weight:500}
+.nps-bar-bg{flex:1;height:24px;background:var(--surface2);border-radius:6px;overflow:hidden;position:relative}
+.nps-bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:11px;font-weight:700;color:#fff;transition:width 1.2s ease}
+.nps-value{width:40px;text-align:right;font-size:14px;font-weight:700}
+
+/* Stats row */
+.stat-card{text-align:center;padding:20px}
+.stat-value{font-size:28px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,var(--blue),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:11px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:0.5px}
+
+/* Scroll */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+
+/* Mobile */
+@media(max-width:768px){
+  .app{padding:12px}
+  header{padding:12px 0}
+  .card{padding:16px;border-radius:12px}
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  nav button{padding:8px 14px;font-size:12px}
+  .insight-title{font-size:17px}
+  .price-table{font-size:12px}
+  .price-table th,.price-table td{padding:8px 10px}
+  .stat-value{font-size:22px}
+}
+
+/* Animations */
+.animate-in{animation:slideUp 0.5s ease forwards;opacity:0}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.delay-1{animation-delay:0.1s}.delay-2{animation-delay:0.2s}.delay-3{animation-delay:0.3s}.delay-4{animation-delay:0.4s}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">Z</div>
+      <div>
+        <h1><span>Zip</span>Chair Intel</h1>
+        <div class="logo-sub">DreamSeat Competitive Intelligence</div>
+      </div>
+    </div>
+    <div class="status">
+      <div class="status-dot"></div>
+      <span id="lastUpdate">Loading...</span>
+    </div>
+  </header>
+
+  <nav id="nav">
+    <button class="active" data-page="executive">📊 Executive</button>
+    <button data-page="pricing">💰 Pricing</button>
+    <button data-page="sentiment">💬 Sentiment</button>
+    <button data-page="radar">📡 Radar</button>
+  </nav>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div id="page-executive" class="page active">
+    <div id="insight-container"></div>
+    <div class="grid4" id="stats-row"></div>
+    <div class="card animate-in delay-2">
+      <div class="card-header">
+        <div class="card-title">🚨 Active Alerts</div>
+        <div class="card-badge" style="background:rgba(239,68,68,0.15);color:var(--red)" id="alert-count">0</div>
+      </div>
+      <div id="alerts-container"></div>
+    </div>
+    <div class="card animate-in delay-3">
+      <div class="card-header"><div class="card-title">📈 Weekly Insights</div></div>
+      <div id="weekly-insights"></div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div id="page-pricing" class="page">
+    <div class="card animate-in">
+      <div class="card-header">
+        <div class="card-title">💰 Average Price by Brand</div>
+        <div class="card-badge" style="background:rgba(26,122,212,0.15);color:var(--blue)">Gaming Chairs</div>
+      </div>
+      <div id="price-bars"></div>
+    </div>
+    <div class="card animate-in delay-1">
+      <div class="card-header">
+        <div class="card-title">📋 Full Price Matrix</div>
+        <div class="card-badge" style="background:var(--surface2);color:var(--text2)" id="product-count">0 products</div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="price-table" id="price-table">
+          <thead><tr><th>Brand</th><th>Product</th><th>Category</th><th>Price</th><th>MSRP</th><th>Savings</th></tr></thead>
+          <tbody id="price-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card animate-in delay-2" id="sale-alerts"></div>
+      <div class="card animate-in delay-3" id="price-ranges"></div>
+    </div>
+  </div>
+
+  <!-- SENTIMENT -->
+  <div id="page-sentiment" class="page">
+    <div class="grid4" id="sentiment-ratings"></div>
+    <div class="card animate-in delay-1">
+      <div class="card-header"><div class="card-title">📊 Net Promoter Score (NPS) Comparison</div></div>
+      <div id="nps-chart"></div>
+    </div>
+    <div class="grid2">
+      <div class="card animate-in delay-2">
+        <div class="card-header"><div class="card-title">👍 Top Praise Themes</div></div>
+        <div id="praise-themes" class="praise"></div>
+      </div>
+      <div class="card animate-in delay-3">
+        <div class="card-header"><div class="card-title">👎 Top Complaint Themes</div></div>
+        <div id="complaint-themes" class="complaint"></div>
+      </div>
+    </div>
+    <div class="card animate-in delay-4">
+      <div class="card-header"><div class="card-title">☁️ Keyword Cloud</div></div>
+      <div class="word-cloud" id="word-cloud"></div>
+    </div>
+  </div>
+
+  <!-- RADAR -->
+  <div id="page-radar" class="page">
+    <div class="card animate-in">
+      <div class="card-header">
+        <div class="card-title">📡 Product & Partnership Radar</div>
+        <div class="card-badge" style="background:rgba(255,107,0,0.15);color:var(--orange)">Live Feed</div>
+      </div>
+      <div id="radar-feed"></div>
+    </div>
+    <div class="grid2">
+      <div class="card animate-in delay-1">
+        <div class="card-header"><div class="card-title">🏢 Competitor Profiles</div></div>
+        <div id="competitor-profiles"></div>
+      </div>
+      <div class="card animate-in delay-2">
+        <div class="card-header"><div class="card-title">⚔️ Competitive Positioning</div></div>
+        <div id="positioning"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const BRAND_COLORS = { secretlab:'#8B5CF6', dxracer:'#EF4444', mavix:'#10B981', zipchair:'#FF6B00' };
+const BRAND_ICONS = { secretlab:'🪑', dxracer:'🏎️', mavix:'⚡', zipchair:'🔥' };
+let DATA = null;
+
+async function fetchData() {
+  try {
+    const [competitors, pricing, reviews, alerts, insights] = await Promise.all([
+      fetch('/intel/data/competitors.json', { cache: 'no-store' }).then(r => r.json()),
+      fetch('/intel/data/pricing.json', { cache: 'no-store' }).then(r => r.json()),
+      fetch('/intel/data/reviews.json', { cache: 'no-store' }).then(r => r.json()),
+      fetch('/intel/data/alerts.json', { cache: 'no-store' }).then(r => r.json()),
+      fetch('/intel/data/insights.json', { cache: 'no-store' }).then(r => r.json()),
+    ]);
+
+    DATA = {
+      competitors,
+      pricing,
+      reviews,
+      alerts,
+      insights,
+      meta: {
+        generatedAt: new Date().toISOString(),
+        client: 'zipchair-deploy/intel-static'
+      }
+    };
+
+    render();
+    document.getElementById('lastUpdate').textContent = 'Static · ' + new Date().toLocaleTimeString();
+  } catch(e) {
+    console.error(e);
+    document.getElementById('lastUpdate').textContent = 'Error loading data';
+  }
+}
+
+// NAV
+document.getElementById('nav').addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('page-' + btn.dataset.page).classList.add('active');
+});
+
+function render() {
+  if (!DATA) return;
+  renderExecutive();
+  renderPricing();
+  renderSentiment();
+  renderRadar();
+}
+
+function timeAgo(ts) {
+  const d = (Date.now() - new Date(ts)) / 1000;
+  if (d < 3600) return Math.floor(d/60) + 'm ago';
+  if (d < 86400) return Math.floor(d/3600) + 'h ago';
+  return Math.floor(d/86400) + 'd ago';
+}
+
+function stars(n) {
+  return '★'.repeat(Math.floor(n)) + (n % 1 >= 0.5 ? '½' : '') + '☆'.repeat(5 - Math.ceil(n));
+}
+
+// EXECUTIVE
+function renderExecutive() {
+  const ins = DATA.insights.insightOfTheDay;
+  document.getElementById('insight-container').innerHTML = `
+    <div class="insight-card animate-in">
+      <div class="insight-label">🔥 Insight of the Day</div>
+      <div class="insight-title">${ins.title}</div>
+      <div class="insight-body">${ins.body}</div>
+      <div class="insight-meta">
+        <span>🎯 Confidence: ${Math.round(ins.confidence*100)}%</span>
+        <span>📈 Impact: ${ins.impact}</span>
+        <span>📂 ${ins.category}</span>
+      </div>
+    </div>`;
+
+  const alerts = DATA.alerts.alerts;
+  const reds = alerts.filter(a=>a.severity==='red').length;
+  const yellows = alerts.filter(a=>a.severity==='yellow').length;
+  const greens = alerts.filter(a=>a.severity==='green').length;
+  
+  document.getElementById('stats-row').innerHTML = `
+    <div class="card animate-in delay-1"><div class="stat-card"><div class="stat-value">${alerts.length}</div><div class="stat-label">Active Alerts</div></div></div>
+    <div class="card animate-in delay-2"><div class="stat-card"><div class="stat-value" style="-webkit-text-fill-color:var(--red)">${reds}</div><div class="stat-label">Critical</div></div></div>
+    <div class="card animate-in delay-3"><div class="stat-card"><div class="stat-value" style="-webkit-text-fill-color:var(--yellow)">${yellows}</div><div class="stat-label">Watch</div></div></div>
+    <div class="card animate-in delay-4"><div class="stat-card"><div class="stat-value" style="-webkit-text-fill-color:var(--green)">${greens}</div><div class="stat-label">Positive</div></div></div>`;
+
+  document.getElementById('alert-count').textContent = reds + ' critical';
+  
+  document.getElementById('alerts-container').innerHTML = alerts
+    .sort((a,b) => ({red:0,yellow:1,green:2})[a.severity] - ({red:0,yellow:1,green:2})[b.severity])
+    .map(a => `
+      <div class="alert ${a.severity}">
+        <div class="alert-time">${timeAgo(a.timestamp)}</div>
+        <div class="alert-title"><div class="severity-dot ${a.severity}"></div>${a.title}</div>
+        <div class="alert-desc">${a.description}</div>
+        <div class="alert-action">→ ${a.actionRequired}</div>
+      </div>`).join('');
+
+  document.getElementById('weekly-insights').innerHTML = DATA.insights.weeklyInsights.map(w => `
+    <div class="alert ${w.impact==='high'?'yellow':'green'}" style="border-left-color:var(--blue)">
+      <div class="alert-title" style="color:var(--blue)">${w.title}</div>
+      <div class="alert-desc">${w.body}</div>
+      <div class="insight-meta" style="margin-top:8px"><span>🎯 ${Math.round(w.confidence*100)}%</span><span>📈 ${w.impact}</span></div>
+    </div>`).join('');
+}
+
+// PRICING
+function renderPricing() {
+  const brands = DATA.pricing.brands;
+  const maxAvg = Math.max(...Object.values(brands).map(b=>b.avgPrice));
+  
+  document.getElementById('price-bars').innerHTML = `<div class="price-bar-container">${
+    Object.entries(brands).map(([k,b]) => `
+      <div class="price-bar-row">
+        <div class="price-bar-label">${BRAND_ICONS[k]} ${b.name.split(' /')[0]}</div>
+        <div class="price-bar-track">
+          <div class="price-bar" style="width:${(b.avgPrice/maxAvg*100).toFixed(0)}%;background:linear-gradient(90deg,${BRAND_COLORS[k]}88,${BRAND_COLORS[k]})">$${b.avgPrice}</div>
+        </div>
+      </div>`).join('')}</div>`;
+
+  let rows = [];
+  let total = 0;
+  Object.entries(brands).forEach(([k,b]) => {
+    b.products.forEach(p => {
+      total++;
+      const savings = p.msrp > p.price ? p.msrp - p.price : 0;
+      const pct = savings > 0 ? Math.round(savings/p.msrp*100) : 0;
+      rows.push(`<tr>
+        <td><span class="brand-pill" style="background:${BRAND_COLORS[k]}22;color:${BRAND_COLORS[k]}">${BRAND_ICONS[k]} ${b.name.split(' /')[0]}</span></td>
+        <td>${p.name}</td>
+        <td style="color:var(--text3)">${p.category}</td>
+        <td><span class="price-current">$${p.price.toLocaleString()}</span>${savings>0?`<span class="price-msrp">$${p.msrp.toLocaleString()}</span>`:''}</td>
+        <td style="color:var(--text3)">$${p.msrp.toLocaleString()}</td>
+        <td>${savings>0?`<span class="price-discount">-${pct}% ($${savings.toFixed(0)})</span>`:'—'}</td>
+      </tr>`);
+    });
+  });
+  document.getElementById('price-tbody').innerHTML = rows.join('');
+  document.getElementById('product-count').textContent = total + ' products';
+
+  document.getElementById('sale-alerts').innerHTML = `
+    <div class="card-header"><div class="card-title">🏷️ Active Sales</div></div>
+    ${Object.entries(brands).filter(([,b])=>b.saleActive).map(([k,b])=>`
+      <div class="alert yellow" style="border-left-color:${BRAND_COLORS[k]}">
+        <div class="alert-title"><span style="color:${BRAND_COLORS[k]}">${BRAND_ICONS[k]} ${b.name.split(' /')[0]}</span></div>
+        <div class="alert-desc">${b.saleNote}</div>
+      </div>`).join('')}`;
+
+  document.getElementById('price-ranges').innerHTML = `
+    <div class="card-header"><div class="card-title">📊 Price Ranges</div></div>
+    ${Object.entries(brands).map(([k,b])=>`
+      <div style="margin-bottom:12px">
+        <div style="font-size:12px;font-weight:500;margin-bottom:4px">${BRAND_ICONS[k]} ${b.name.split(' /')[0]}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:11px;color:var(--text3)">$${b.priceRange.min}</span>
+          <div style="flex:1;height:8px;background:var(--surface2);border-radius:4px;position:relative;overflow:hidden">
+            <div style="position:absolute;left:${(b.priceRange.min/3000*100)}%;right:${100-(b.priceRange.max/3000*100)}%;height:100%;background:${BRAND_COLORS[k]};border-radius:4px;opacity:0.7"></div>
+          </div>
+          <span style="font-size:11px;color:var(--text3)">$${b.priceRange.max.toLocaleString()}</span>
+        </div>
+      </div>`).join('')}`;
+}
+
+// SENTIMENT
+function renderSentiment() {
+  const reviews = DATA.reviews.brands;
+  
+  document.getElementById('sentiment-ratings').innerHTML = Object.entries(reviews).map(([k,r]) => `
+    <div class="card animate-in">
+      <div style="text-align:center">
+        <div style="font-size:12px;font-weight:600;color:${BRAND_COLORS[k]};margin-bottom:8px">${BRAND_ICONS[k]} ${k==='zipchair'?'ZipChair':k.charAt(0).toUpperCase()+k.slice(1)}</div>
+        <div class="rating-big" style="color:${BRAND_COLORS[k]}">${r.overallRating}</div>
+        <div class="rating-stars">${stars(r.overallRating)}</div>
+        <div class="rating-count">${(r.totalReviews/1000).toFixed(1)}k reviews</div>
+      </div>
+    </div>`).join('');
+
+  // NPS
+  const maxNPS = Math.max(...Object.values(reviews).map(r=>r.nps));
+  document.getElementById('nps-chart').innerHTML = Object.entries(reviews).map(([k,r]) => `
+    <div class="nps-row">
+      <div class="nps-brand" style="color:${BRAND_COLORS[k]}">${BRAND_ICONS[k]} ${k==='zipchair'?'ZipChair':k.charAt(0).toUpperCase()+k.slice(1)}</div>
+      <div class="nps-bar-bg"><div class="nps-bar-fill" style="width:${(r.nps/maxNPS*100)}%;background:linear-gradient(90deg,${BRAND_COLORS[k]}88,${BRAND_COLORS[k]})">${r.nps}</div></div>
+      <div class="nps-value" style="color:${BRAND_COLORS[k]}">${r.nps}</div>
+    </div>`).join('');
+
+  // Praise themes (all brands)
+  let allPraise = [], allComplaints = [];
+  Object.entries(reviews).forEach(([k,r]) => {
+    r.topPraise.forEach(t => allPraise.push({...t, brand: k}));
+    r.topComplaints.forEach(t => allComplaints.push({...t, brand: k}));
+  });
+  allPraise.sort((a,b) => b.mentions - a.mentions);
+  allComplaints.sort((a,b) => b.mentions - a.mentions);
+  const maxPraise = allPraise[0]?.mentions || 1;
+  const maxComplaint = allComplaints[0]?.mentions || 1;
+
+  document.getElementById('praise-themes').innerHTML = allPraise.slice(0,8).map(t => `
+    <div class="theme-item">
+      <div class="theme-name"><span style="color:${BRAND_COLORS[t.brand]}">${BRAND_ICONS[t.brand]}</span> ${t.theme}</div>
+      <div class="theme-bar"><div class="theme-fill" style="width:${(t.mentions/maxPraise*100)}%"></div></div>
+      <div class="theme-count">${(t.mentions/1000).toFixed(1)}k</div>
+    </div>`).join('');
+
+  document.getElementById('complaint-themes').innerHTML = allComplaints.slice(0,8).map(t => `
+    <div class="theme-item">
+      <div class="theme-name"><span style="color:${BRAND_COLORS[t.brand]}">${BRAND_ICONS[t.brand]}</span> ${t.theme}</div>
+      <div class="theme-bar"><div class="theme-fill" style="width:${(t.mentions/maxComplaint*100)}%"></div></div>
+      <div class="theme-count">${(t.mentions/1000).toFixed(1)}k</div>
+    </div>`).join('');
+
+  // Word cloud
+  const words = [
+    {text:'comfortable',size:24,color:'var(--green)'},{text:'sturdy',size:20,color:'var(--green)'},
+    {text:'licensed',size:22,color:'var(--orange)'},{text:'expensive',size:18,color:'var(--red)'},
+    {text:'ergonomic',size:20,color:'var(--teal)'},{text:'premium',size:19,color:'var(--purple)'},
+    {text:'firm seat',size:15,color:'var(--yellow)'},{text:'great support',size:18,color:'var(--green)'},
+    {text:'peeling',size:14,color:'var(--red)'},{text:'team logo',size:21,color:'var(--orange)'},
+    {text:'assembly',size:13,color:'var(--yellow)'},{text:'breathable',size:16,color:'var(--teal)'},
+    {text:'racing style',size:15,color:'var(--red)'},{text:'XZipit',size:19,color:'var(--orange)'},
+    {text:'lumbar',size:17,color:'var(--blue)'},{text:'durable',size:16,color:'var(--green)'},
+    {text:'modern',size:14,color:'var(--teal)'},{text:'heavy',size:12,color:'var(--yellow)'},
+    {text:'value',size:18,color:'var(--green)'},{text:'outdated',size:13,color:'var(--red)'}
+  ];
+  document.getElementById('word-cloud').innerHTML = words.map(w => 
+    `<span class="word" style="font-size:${w.size}px;color:${w.color};background:${w.color}15;border:1px solid ${w.color}30">${w.text}</span>`
+  ).join('');
+}
+
+// RADAR
+function renderRadar() {
+  const alerts = DATA.alerts.alerts.sort((a,b) => new Date(b.timestamp)-new Date(a.timestamp));
+  document.getElementById('radar-feed').innerHTML = alerts.map(a => `
+    <div class="feed-item">
+      <div class="feed-header">
+        <span class="feed-brand" style="background:${BRAND_COLORS[a.brand]}22;color:${BRAND_COLORS[a.brand]}">${BRAND_ICONS[a.brand]} ${a.brand==='zipchair'?'ZipChair':a.brand.charAt(0).toUpperCase()+a.brand.slice(1)}</span>
+        <span class="feed-category">${a.category}</span>
+        <span class="severity-dot ${a.severity}"></span>
+      </div>
+      <div class="feed-title">${a.title}</div>
+      <div class="feed-desc">${a.description}</div>
+      <div class="feed-time">${timeAgo(a.timestamp)} · ${a.actionRequired}</div>
+    </div>`).join('');
+
+  // Competitor profiles
+  const comps = DATA.competitors.competitors;
+  document.getElementById('competitor-profiles').innerHTML = comps.map(c => `
+    <div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:18px">${c.logo}</span>
+        <span style="font-weight:600;color:${c.color}">${c.name}</span>
+        <span style="font-size:10px;color:var(--text3)">Est. ${c.founded}</span>
+      </div>
+      <div style="font-size:11px;color:var(--text2);margin-bottom:6px">${c.tagline} · ${c.hq}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">
+        ${c.strengths.map(s=>`<span style="font-size:10px;padding:2px 8px;border-radius:10px;background:${c.color}15;color:${c.color}">${s}</span>`).join('')}
+      </div>
+    </div>`).join('');
+
+  // Positioning
+  document.getElementById('positioning').innerHTML = `
+    <div style="font-size:13px;line-height:1.8;color:var(--text2)">
+      <div style="margin-bottom:12px">
+        <span style="color:var(--orange);font-weight:600">ZipChair</span> owns the <strong style="color:#fff">licensed sports furniture</strong> niche — no competitor can match NFL/NBA/MLB/NHL/MLS licensing.
+      </div>
+      <div style="margin-bottom:12px">
+        <span style="color:var(--purple);font-weight:600">Secretlab</span> dominates <strong style="color:#fff">esports & entertainment IP</strong> (Diablo, Naruto, LoL, Lamborghini).
+      </div>
+      <div style="margin-bottom:12px">
+        <span style="color:var(--teal);font-weight:600">Mavix</span> leads in <strong style="color:#fff">ergonomic innovation</strong> with mesh-back designs.
+      </div>
+      <div style="margin-bottom:12px">
+        <span style="color:#EF4444;font-weight:600">DXRacer</span> is the <strong style="color:#fff">legacy brand</strong> with declining perception — vulnerable.
+      </div>
+      <div style="margin-top:16px;padding:12px;background:rgba(255,107,0,0.08);border-radius:8px;border-left:3px solid var(--orange)">
+        <strong style="color:var(--orange)">Key Insight:</strong> ZipChair's moat (sports licensing) is the hardest to replicate. Secretlab would need years of league negotiations. This is the #1 differentiator to lean into.
+      </div>
+    </div>`;
+}
+
+// Init
+fetchData();
+setInterval(fetchData, 60000);
+</script>
+</body>
+</html>

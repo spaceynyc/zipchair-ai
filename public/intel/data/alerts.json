@@ -1,0 +1,75 @@
+{
+  "lastUpdated": "2026-02-14T17:52:00Z",
+  "alerts": [
+    {
+      "id": "alert-001",
+      "severity": "red",
+      "title": "Secretlab Presidents' Day Sale — Up to $139 OFF",
+      "description": "Secretlab running aggressive discounts across TITAN Evo lineup. Combined with minimum-spend bonus ($100 extra off), effective prices drop to $380 for base model. This undercuts ZipChair's Xpression Pro 3.0 at $399.",
+      "brand": "secretlab",
+      "category": "pricing",
+      "timestamp": "2026-02-14T12:00:00Z",
+      "actionRequired": "Consider matching with Valentine's/Presidents' Day promo on gaming chairs"
+    },
+    {
+      "id": "alert-002",
+      "severity": "red",
+      "title": "Mavix Slashes M9 by $200 — Now $799",
+      "description": "Mavix's flagship M9 dropped from $999 to $799. M5 and M7 also discounted. Aggressive push into premium ergonomic gaming segment.",
+      "brand": "mavix",
+      "category": "pricing",
+      "timestamp": "2026-02-14T10:00:00Z",
+      "actionRequired": "Monitor if permanent price cut or temporary promotion"
+    },
+    {
+      "id": "alert-003",
+      "severity": "yellow",
+      "title": "Mavix Expanding into Desks & Accessories",
+      "description": "Mavix now selling standing desks ($340-$517) and cockpit desk configurations. Indicates strategy shift from chair-only to full gaming setup ecosystem.",
+      "brand": "mavix",
+      "category": "product",
+      "timestamp": "2026-02-13T08:00:00Z",
+      "actionRequired": "Evaluate DreamSeat desk opportunity — licensed team desks?"
+    },
+    {
+      "id": "alert-004",
+      "severity": "yellow",
+      "title": "DXRacer Patent Portfolio Expansion",
+      "description": "DXRacer promoting multiple international patents and awards on their site. May indicate IP enforcement strategy or licensing play.",
+      "brand": "dxracer",
+      "category": "legal",
+      "timestamp": "2026-02-12T14:00:00Z",
+      "actionRequired": "Review DreamSeat patent coverage for XZipit system"
+    },
+    {
+      "id": "alert-005",
+      "severity": "green",
+      "title": "ZipChair Seahawks Super Bowl LX Gear LIVE",
+      "description": "New Super Bowl Champions merchandise (Recliners, SuiteMax VIP) published on Shopify within hours of win. First-mover advantage on licensed championship gear.",
+      "brand": "zipchair",
+      "category": "product",
+      "timestamp": "2026-02-09T13:00:00Z",
+      "actionRequired": "Push marketing — no competitor can match licensed championship furniture"
+    },
+    {
+      "id": "alert-006",
+      "severity": "green",
+      "title": "Competitor NPS Gap: ZipChair Licensing = Moat",
+      "description": "Review analysis shows 93% positive sentiment for ZipChair's licensed branding — highest single-theme score across all brands. No competitor offers comparable sports licensing.",
+      "brand": "zipchair",
+      "category": "sentiment",
+      "timestamp": "2026-02-14T09:00:00Z",
+      "actionRequired": "Double down on licensing in marketing messaging"
+    },
+    {
+      "id": "alert-007",
+      "severity": "yellow",
+      "title": "Secretlab Collaborations Expanding (Diablo IV, Lamborghini, Naruto)",
+      "description": "Secretlab site shows new collaboration pages for Diablo IV, Automobili Lamborghini, Naruto, Final Fantasy XIV, DC, and League of Legends. Entertainment licensing strategy intensifying.",
+      "brand": "secretlab",
+      "category": "partnership",
+      "timestamp": "2026-02-14T11:00:00Z",
+      "actionRequired": "Secretlab moving into entertainment licensing — ZipChair's sports licensing remains uncontested but watch for overlap"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "competitors": [
+    {
+      "id": "secretlab",
+      "name": "Secretlab",
+      "website": "https://secretlab.co",
+      "logo": "🪑",
+      "color": "#8B5CF6",
+      "founded": 2014,
+      "hq": "Singapore",
+      "tagline": "Award-winning gaming chairs",
+      "strengths": ["Brand recognition", "Esports partnerships", "Premium materials", "Global distribution"],
+      "weaknesses": ["Higher price point", "No licensed sports branding", "Limited customization post-purchase"]
+    },
+    {
+      "id": "dxracer",
+      "name": "DXRacer",
+      "website": "https://www.dxracer.com",
+      "logo": "🏎️",
+      "color": "#EF4444",
+      "founded": 2001,
+      "hq": "USA (MI)",
+      "tagline": "The Original Gaming Chair",
+      "strengths": ["First-mover advantage", "Racing heritage", "Competitive pricing", "Patent portfolio"],
+      "weaknesses": ["Aging brand perception", "Less premium feel", "Fewer collaboration deals"]
+    },
+    {
+      "id": "mavix",
+      "name": "Mavix",
+      "website": "https://www.mavix.com",
+      "logo": "⚡",
+      "color": "#10B981",
+      "founded": 2020,
+      "hq": "USA",
+      "tagline": "Ergonomic gaming chairs",
+      "strengths": ["Ergonomic focus", "Modern design", "Expanding product line (desks)", "Strong review scores"],
+      "weaknesses": ["Newer brand", "Smaller market share", "Limited licensing deals"]
+    },
+    {
+      "id": "zipchair",
+      "name": "ZipChair / DreamSeat",
+      "website": "https://www.zipchair.com",
+      "logo": "🔥",
+      "color": "#FF6B00",
+      "founded": 2001,
+      "hq": "USA (NJ)",
+      "tagline": "Official licensed furniture",
+      "strengths": ["Exclusive sports licensing (NFL, NBA, MLB, NHL, MLS)", "XZipit swappable panels", "B2B stadium seating", "Broad product range"],
+      "weaknesses": ["Lower brand awareness in gaming", "Less esports presence", "Marketing budget vs Secretlab"]
+    }
+  ],
+  "lastUpdated": "2026-02-14T17:52:00Z",
+  "dataSource": "Manual research + web scraping"
+}
